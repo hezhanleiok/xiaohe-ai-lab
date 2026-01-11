@@ -2,19 +2,23 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 /**
- * 告诉 Astro：要生成哪些文章页面
+ * 使用 import.meta.glob（Astro v4 最稳写法）
  */
 export async function getStaticPaths() {
-  const posts = await Astro.glob("../../content/blog/*.md");
+  const modules = import.meta.glob("../../content/blog/*.md");
 
-  return posts.map((post) => ({
-    params: { slug: post.file.split("/").pop().replace(".md", "") },
-    props: { post },
-  }));
+  return Object.keys(modules).map((path) => {
+    const slug = path.split("/").pop().replace(".md", "");
+    return {
+      params: { slug },
+      props: { path },
+    };
+  });
 }
 
-const { post } = Astro.props;
-const { Content, frontmatter } = await post.render();
+const { path } = Astro.props;
+const post = await import(path);
+const { Content, frontmatter } = post;
 ---
 
 <BaseLayout title={frontmatter.title}>
