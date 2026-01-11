@@ -1,17 +1,24 @@
-
 backend:
-  name: git-gateway
+  name: github
+  repo: hezhanleiok/xiaohe-ai-lab
   branch: main
+  auth_type: pkce
 
+# 媒体文件（图片）存放位置
 media_folder: "public/images"
 public_folder: "/images"
 
+# 内容集合
 collections:
   - name: "blog"
     label: "博客文章"
+    label_singular: "文章"
     folder: "src/content/blog"
     create: true
     slug: "{{slug}}"
+    preview_path: "blog/{{slug}}"
     fields:
       - { label: "标题", name: "title", widget: "string" }
+      - { label: "简介", name: "description", widget: "text", required: false }
+      - { label: "发布日期", name: "publishDate", widget: "datetime", required: false }
       - { label: "正文", name: "body", widget: "markdown" }
