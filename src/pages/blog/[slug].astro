@@ -1,31 +1,28 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
 /**
- * 使用 import.meta.glob（Astro v4 最稳写法）
+ * 告诉 Astro 要生成哪些文章页面
  */
 export async function getStaticPaths() {
-  const modules = import.meta.glob("../../content/blog/*.md");
+  const posts = await getCollection("blog");
 
-  return Object.keys(modules).map((path) => {
-    const slug = path.split("/").pop().replace(".md", "");
-    return {
-      params: { slug },
-      props: { path },
-    };
-  });
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
 }
 
-const { path } = Astro.props;
-const post = await import(path);
-const { Content, frontmatter } = post;
+const { post } = Astro.props;
+const { Content } = await post.render();
 ---
 
-<BaseLayout title={frontmatter.title}>
+<BaseLayout title={post.data.title}>
   <article>
-    <h1>{frontmatter.title}</h1>
-    {frontmatter.description && (
-      <p style="color:#666">{frontmatter.description}</p>
+    <h1>{post.data.title}</h1>
+    {post.data.description && (
+      <p style="color:#666">{post.data.description}</p>
     )}
     <Content />
   </article>
