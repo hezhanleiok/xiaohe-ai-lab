@@ -1,8 +1,6 @@
-
 ---
-title: "第一篇：为什么我要测评 AI 工具？"
-description: "本站创立初衷"
-publishDate: 2026-01-01
+title: "第一篇文章"
+description: "为什么我要做 AI 工具测评"
+publishDate: 2025-01-01
 ---
-
-这是小何AI实验室的第一篇原创文章。
+正文内容
