@@ -1,0 +1,15 @@
+
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const posts = await Astro.glob('../../content/blog/*.md');
+---
+<BaseLayout title="博客 - 小何AI实验室">
+  <h2>博客文章</h2>
+  <ul>
+    {posts.map(post => (
+      <li>
+        <a href={post.url}>{post.frontmatter.title}</a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
