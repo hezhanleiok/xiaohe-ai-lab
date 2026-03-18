@@ -1,29 +1,68 @@
-
 ---
 const { title = "小何AI实验室" } = Astro.props;
 ---
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <title>{title}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="专注 AI 工具测评、生图、生视频的原创博客" />
-</head>
-<body>
-  <header>
-    <h1>小何AI实验室</h1>
-    <nav>
-      <a href="/">首页</a> |
-      <a href="/blog">博客</a> |
-      <a href="/about">关于</a>
-    </nav>
-  </header>
-  <main>
-    <slot />
-  </main>
-  <footer>
-    <p>© 2026 小何AI实验室 · <a href="/privacy-policy">隐私政策</a></p>
-  </footer>
-</body>
+
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content="专注 AI 工具测评与实战分享 | 生图 · 生视频 · AI效率工具" />
+
+    <!-- Google Fonts: 现代中文字体 + sans-serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- 如果用 Tailwind，在 astro.config 加 integrations: [tailwind()] 后这里会自动注入 -->
+    <!-- 否则下面放自定义 CSS -->
+    <style is:global>
+      :root {
+        --bg-gradient: linear-gradient(135deg, #1e0533 0%, #0f172a 50%, #1e3a5f 100%);
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+      }
+      body {
+        margin: 0;
+        font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-primary);
+        min-height: 100vh;
+        background-attachment: fixed; /* 渐变固定，不随滚动 */
+      }
+      h1, h2 {
+        font-weight: 600;
+        letter-spacing: -0.025em;
+      }
+      a {
+        color: #a5b4fc;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      a:hover {
+        color: #c7d2fe;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <header class="py-6 px-4 md:px-8">
+      <nav class="max-w-5xl mx-auto flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold text-white">小何AI实验室</a>
+        <div class="space-x-6 text-lg">
+          <a href="/">首页</a>
+          <a href="/blog">博客</a>
+          <a href="/about">关于</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <footer class="py-8 text-center text-sm text-slate-400 border-t border-slate-700/50">
+      <p>© 2026 小何AI实验室 · <a href="/privacy-policy">隐私政策</a></p>
+    </footer>
+  </body>
 </html>
