@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "astro": "^4.0.0",
-    "@astrojs/tailwind": "^5.1.0"  // 添加这个（最新版兼容 Astro 4）
+    "@astrojs/tailwind": "^5.1.0"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.0"  // 或最新版
+    "tailwindcss": "^3.4.0"
   }
 }
